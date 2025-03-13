@@ -94,12 +94,12 @@ namespace _55_3
 
         private void button4_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "選擇文字檔或圖片檔";
-            ofd.Filter = textBox1.Visible?"Text Files (*.txt)|*.txt": "Image Files (*.jpg;*.png;*.bmp)|*.jpg;*.png;*.bmp";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            SaveFileDialog save = new SaveFileDialog();
+            save.Title = "選擇文字檔或圖片檔";
+            save.Filter = textBox1.Visible?"Text Files (*.txt)|*.txt": "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp";
+            if (save.ShowDialog() == DialogResult.OK)
             {
-                string filePath2 = ofd.FileName;
+                string filePath2 = save.FileName;
                 string extension = Path.GetExtension(filePath).ToLower();
                 if (extension == ".txt" && textBox1.Visible)
                 {
@@ -114,6 +114,7 @@ namespace _55_3
                 }
                 else if (extension == ".jpg" || extension == ".png" || extension == ".bmp" && pictureBox1.Visible)
                 {
+                    save.DefaultExt = extension;
                     try
                     {
                         if (filePath != filePath2)
